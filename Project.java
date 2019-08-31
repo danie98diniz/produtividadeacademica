@@ -261,6 +261,42 @@ public class Project {
         System.out.println("type any key to continue..");
         String string = scan.nextLine();
     }
+    //----------------------------------------- PROJECT SELECTION -----------------------
+    public void Project_selection(ArrayList<Project> AllProjects){
+        Scanner scan = new Scanner(System.in); // creates a object called scan to scan inputs along the code
+
+        System.out.println("choose a project to consult:");
+        for(int i = 0; i < AllProjects.size(); i++){
+            System.out.println(i+". "+AllProjects.get(i).getName());
+        }
+        int option = scan.nextInt();
+        scan.nextLine();
+        Consult_by_project(AllProjects.get(option));
+    }
+
+
+    //----------------------------------------- PROJECT CONSULT ------------------------
+    public static void Consult_by_project(Project Yourproject){
+
+        System.out.println("Name: "+Yourproject.getName());
+        System.out.println("Status: "+Yourproject.getStatus());
+        System.out.println("Description: "+Yourproject.getDescription());
+        System.out.println("Goal: "+Yourproject.getGoal());
+        System.out.println("Initial date: "+Yourproject.getInitial_date());
+        System.out.println("End date: "+Yourproject.getEnd_date());
+        System.out.println("Financial agency: "+Yourproject.getFinancial_agency());
+        System.out.println("Budget: "+Yourproject.getBudget());
+        System.out.println("Collaborators:");
+        for(int i = 0; i < Yourproject.getCollaboratorsList().size(); i++){
+            System.out.println(Yourproject.getCollaboratorsList().get(i).getName());
+        }
+
+        Publication newPublication = new Publication();
+        newPublication.Sort_publications(Yourproject.getProjectsPublications());
+
+
+    }
+
 
     public ArrayList<Publication> getProjectsPublications() {
         return ProjectsPublications;
