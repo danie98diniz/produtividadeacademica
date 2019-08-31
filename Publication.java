@@ -119,6 +119,59 @@ public class Publication {
             }
         }
     }
+    //--------------------------------------- SORT PUBLICATIONS ------------------------
+    public void Sort_publications(ArrayList<Publication> PublicationList){
+        ArrayList<Publication> SortedPublications = new ArrayList<>();
+        Scanner scan = new Scanner(System.in); // creates a object called scan to scan inputs along the code
+
+        int GreaterIndex = 0;
+        if(PublicationList.size() < 1){
+            System.out.println("there are no publications related to this project");
+            return;
+        }
+        int year = PublicationList.get(0).getYear();
+        while(true){
+
+            for (int i = 0; i < PublicationList.size(); i++){
+                if(PublicationList.get(i).getYear() > year){
+                    GreaterIndex = i;
+                    year = PublicationList.get(i).getYear();
+                }
+            }
+            SortedPublications.add(PublicationList.get(GreaterIndex));
+            PublicationList.remove(GreaterIndex);
+            GreaterIndex = 0;
+            if(PublicationList.size() < 1){
+                break;
+            }
+            year = PublicationList.get(0).getYear();
+        }
+
+        PublicationList.addAll(SortedPublications);
+        Publication newPublication = new Publication();
+        newPublication = SortedPublications.get(0);
+        for(int i = 0; i < SortedPublications.size(); i++){
+            newPublication = SortedPublications.get(i);
+            System.out.println("------------------------------------------------");
+            System.out.println(" - Publication title: "+newPublication.getName());
+            System.out.println(" - Authors: ");
+            for(int j = 0; j < newPublication.getAutors().size(); j++){
+                System.out.println(newPublication.getAutors().get(j).getName());
+            }
+            System.out.println(" - published in "+newPublication.getConference_name()+" conference");
+            System.out.println(" - year: "+newPublication.getYear());
+            if(newPublication.getProject() == 1){
+                System.out.println(" - Project: "+newPublication.getProjectAssociated().getName());
+            }
+            for(int h = 0; h < newPublication.getPublication().size(); h++){
+                System.out.println(newPublication.getPublication().get(h));
+            }
+            System.out.println("-----------------------------------------------");
+        }
+        System.out.println("type any key to continue");
+        String key = scan.nextLine();
+
+    }
 
     public Publication() {
     }
